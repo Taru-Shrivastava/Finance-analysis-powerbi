@@ -1,166 +1,156 @@
-# Personal Finance PowerBI Dashboard
+Personal Finance Power BI Dashboard
 
-A project that utilizes Microsoft PowerBI to analyze personal financial data and visualize expenses through an interactive dashboard.
+A project built using Microsoft Power BI to analyze personal financial records and transform raw expense data into interactive, insightful dashboards.
 
-> _"Data analysis is not just about presenting data, but to build a story and create a meaningful narrative from the raw data. At the end of the day, that's what analytics is all about - not about writing code, not about crunching numbers, not about memorizing formula syntax - it's about deriving meaning and context from the data and, more importantly, using it to make real change."_
-> _- Chris Dutton, Maven Analytics_
+"Data analysis isn’t just about showing numbers—it’s about uncovering a story and building context from raw information. True analytics goes beyond formulas and calculations; it’s about using data to drive real, meaningful change."
+— Chris Dutton, Maven Analytics
 
+Problem Statement
 
-## Problem Description
+For a few years, I have been tracking my day-to-day expenses in Microsoft Excel. While Excel’s sorting and filtering functions provided a basic overview, they lacked depth for advanced analysis. To gain richer insights, I decided to convert my static spreadsheets into dynamic dashboards using Power BI.
 
-As one should, I have been keeping track of all my daily spending using Microsoft Excel. Using basic sorting/filtering in Excel I'm able to see a very high-level overview of my spending. In order to perform data analysis at a more deeper level, we will turn my static Excel data into dynamic PowerBI dashboards.
+Project Objectives
 
+The dashboards aim to answer the following questions:
 
-## Project Goals
+What are my monthly spending trends for each year?
 
-Here are the questions I would like the PowerBI dashboards to answer:
-- Monthly spending (in a given year).
-- How much money spent per item category.
-- List all expenses with comments.
-- How much money spent per location.
-- The number of purchases in various price ranges.
-- Quarterly and weekly spending information.
-- Various average costs (per week, month, day).
-- Comparison of food costs to restaurant costs.
-- Spending behavior when I'm sick.
-- Comparison of weekday and weekend spending.
+How much do I spend by category?
 
-In order to answer these questions, I invested time in planning the PowerBI measures I would need to create and also planned a rough outline of the dashboard visuals I wanted. 
+Can I view a detailed list of expenses with comments?
 
+How much is spent across different purchase locations?
 
-## Data Analysis Summary
+What is the distribution of purchases across price ranges?
 
-Here are the dashboards that I created. If you would like to actually play around with these dashboards see the end of this readme for instructions:
+What do my quarterly and weekly spending patterns look like?
 
-![alt text][ExecSumm]
+What are my average daily, weekly, and monthly expenses?
 
-![alt text][Granular]
+How do food costs compare with restaurant costs?
 
+How does my spending change when I’m sick?
 
-## Hardware and Software Used
+How does weekend spending differ from weekdays?
 
-- Python (v3.8)
-- Python Libraries: openpyxl, os
-- Windows 10 Machine
-- Microsoft PowerBI Desktop (v2.93)
-- Microsoft Excel
-- Apple iPad (7th Gen) and pencil
+Before building visuals, I mapped out the required measures and drafted a rough dashboard layout.
 
+Analysis Summary
 
-## Overview of Microsoft Power BI
+I developed multiple dashboards to explore these questions. Sample views:
 
-Microsoft Power BI is a data analytics tool used to provide business intelligence capabilities, including loading, modelling, and visualizing data sets. Its initial release was over 10 years ago in July 2011, and since then the Microsoft team has continued to add greater functionality and improve ease-of-use on a monthly basis. 
 
-The program itself can be used both on a local machine (via Power BI "Desktop") and also on the cloud (via Power BI "Services"). It can be used in a similar fashion as how one may use Excel, but also provides the greater ability to more easily create interactive visualizations called 'dashboards'. 
 
 
-## Explanation of Project Files
+Tools & Technologies
 
-Here is a brief description of each file/folder found in this GitHub repository.
+Python (v3.8)
 
-### **Finance_Data/20xx**
-This is the folder that contains each month's Excel data in a separate Excel workbook. The dates (currently) range from Aug 2018 - Dec 2020.
+Python libraries: openpyxl, os
 
-### change_excel_sheets.py
-This Python script takes in an Excel file with multiple sheets and renames all sheets to 'Sheet1'. (*Apparantly this was necessary for importing the Excel data into PowerBI?*)
+Windows 10
 
-### Finance_Data.xlsx
-This is a copy of the original Excel file that I was using to keep track of my spending.
+Microsoft Power BI Desktop (v2.93)
 
-### Personal_Finance_Dashboard.pbix
-This is the main Power BI file containing the finance dashboards.
+Microsoft Excel
 
+Apple iPad (7th Gen) + Pencil
 
-## Data Collection Methodology
+About Microsoft Power BI
 
-I collected this data by keeping all purchase receipts and inputting the data manually into Excel. The information I kept track of was: Date, Item Category, Price, Location, Comment.
+Power BI is Microsoft’s business intelligence platform that enables data import, modeling, and visualization. First launched in 2011, it has steadily evolved with new features added monthly. It can be used both locally via Power BI Desktop or online through Power BI Service. While somewhat similar to Excel, Power BI makes it much easier to create interactive and visually engaging dashboards.
 
-In order to import this data into PowerBI, it was quite the process. Since the data was contained in *multiple Excel sheets in the same Excel workbook*, I first had to separate the sheets into their own Excel workbook - this turned out to be the easiest avenue to importing the data.
+Repository Structure
+Finance_Data/20xx
 
+Contains monthly Excel files of expenses, covering Aug 2018 – Dec 2020.
 
-## Data Cleaning
+change_excel_sheets.py
 
-There was quite a bit of data cleaning to do. I had to do some basic editing of the 'Item' category column, in order to have consistent categories. For example, I had 'hair cut', 'Hair cut', 'Hair-Cut' as separate categores, and so had to standardize this into simply a 'Hair Cut' category.
+Python script that renames multiple Excel sheet tabs to “Sheet1” for smoother Power BI integration.
 
-There was a lot of work needed to be done with dates. Some dates were of a 'Text' type, some were a 'General' type, and still others were the 'Date' type. These had to be standardized.
+Finance_Data.xlsx
 
-Finally, only a few rows contained null entries, so I simply chose to remove these rows from the overall dataset; This would not drastically affect the variance of the overall data.
+The original Excel workbook where I tracked spending.
 
+Personal_Finance_Dashboard.pbix
 
-## Measure Creation & Visualizations
+The Power BI file containing all dashboards and visuals.
 
-In order to help answer the questions listed above, I started by making three other tables: (i) Calendar Lookup, (i) Item Lookup, (iii) Location Lookup.
+Data Collection
 
-The calendar lookup contains each range of dates from the data. From this I created various other useful calculated columns including month name/number, month-and-year, quarter,  and end of week/month.
-  
-The item lookup table contained a single column of each distinct Item category. While working through the project, I realized that every month had a rental payment listed. It didn't make sense to me to have this consistently in each month, so I created a filter that can be used to manually include or exclude rental payments. To accomplish this I needed a second column in the Item Lookup table to represent the 'Rent' item as a Boolean.
-  
-The location table contains a single column of each distinct location of purchase.
+I manually entered expense data into Excel using purchase receipts. The dataset includes Date, Category, Price, Location, and Comment.
 
-Once these lookup tables were ready, I followed my planned layout above and created each visual one at a time. As I created these, I also created the associated measure I would need to portray the data. Some of the measures I made were:
-- total cost
-- price ranges
-- average cost per day, week, year
-- Boolean to adress my sick days
+Because my data was spread across multiple sheets within a workbook, I split them into individual Excel files to simplify Power BI imports.
 
-The main visuals I used were 'slicers'. I created calendar slicers for overall date, year, quarter, month, and day of week. With these one has a lot of options as to what granularity they wish to visualize their data with respect to dates. I also have two slicers for weekday/weekend and healthy/sick selections. There is also a slicer that acts as a dropdown to select various purchase price ranges.
+Data Cleaning
 
+Several preprocessing steps were required:
 
-## Conclusion
+Category standardization: Fixed inconsistent category labels (e.g., “hair cut”, “Hair-Cut” → “Hair Cut”).
 
-Using PowerBI I was able to visualize my purchases data in an interactive way. This allowed me to drill deeper into my spending behaviour and with this information I can now be more conscientious of what I choose to spend my money on.
+Date formatting: Standardized mixed formats (Text, General, Date).
 
+Null values: Removed rows with missing values, since they were minimal and did not affect results.
 
-## How You Can View My Power BI Dashboards
+Measures & Visuals
 
-For those interested in actually playing around with the dashboard, here are some detailed steps to help you do so:
+To answer the research questions, I created three lookup tables:
 
-**1. Download PowerBI**
+Calendar Lookup – Generated date ranges with derived fields such as month, quarter, week-ending, etc.
 
-Go to this site: https://powerbi.microsoft.com/en-us/desktop/ and click the "Download Free" button in the center of the screen *(this may change in the future!)*. There may be a prompt that asks you to download from the Microsoft Store instead, in which case simply click the button that opens the Microsoft Store and install the application from there.
+Item Lookup – Contained unique categories; included a Boolean column to toggle rent on/off for analysis.
 
-*Note: You **DO NOT** have to sign-in to use this 'Desktop' version, although if you choose to then you'll need to use a work/school email adddress.*
+Location Lookup – Unique purchase locations.
 
-**2. Configure Some Settings**
+Using these, I built measures such as:
 
-Open Power BI Desktop and simply close the large dialog window that starts. Then, go: File -> Options and settings -> Options. On the left side you'll see two general categories of options: GLOBAL and CURRENT FILE.
+Total cost
 
-Under the GLOBAL options, go to 'Preview features' and de-select all options.
+Average daily/weekly/monthly cost
 
-Under the CURRENT FILE options, go to 'Data load' and de-select the two options: (i) Update or delete relationships when refreshing data, and (ii) Autodetect new relationships after data is loaded.
+Purchase counts by price range
 
-Finally, again under the CURRENT FILE options, go to 'Regional Settings' and make the appropriate selection for your region.
+Flags for sick days, weekday/weekend spending
 
-**3. Download My Project Files**
+Key visuals include slicers for date, category, location, health status, weekday/weekend, and price ranges—offering flexible granularity.
 
-Now that everything is set up, you simply have to download all my project files as they are into a folder on your machine, open the Power BI file (the one with .pbix extension) and have fun!
+Conclusion
 
+By leveraging Power BI, I transformed static expense logs into interactive dashboards, providing deeper insights into personal spending habits. These dashboards make it easier to identify trends, compare categories, and make informed financial choices.
 
-## Future Steps
+Try It Yourself
 
-For future improvement, we can consider the following ideas:
-- Attempt to create more visually appealing dashboards (perhaps you can find a template to use?).
-- Perhaps there is a way to generalize this dashboard so anyone can use it? (Launch via Docker container?)
-  - Would need to ask users to standardize their Excel sheets a certain way?
-- Think of new informative metrics that may be useful.
-- Create new or modify existing dashboards for ease-of-use on mobile/tablet devices. (Can be done in Power BI Desktop)
+Download Power BI Desktop
+👉 https://powerbi.microsoft.com/en-us/desktop/
 
+Adjust Settings
 
-## Author
+File → Options → Preview Features: uncheck all
 
-- **AJ Singh** (https://github.com/aj112358/)
+File → Options → Data Load: disable relationship auto-detection
 
+File → Options → Regional Settings: adjust to your region
 
-## Acknowledgements
+Open the Project
+Download this repo, open the .pbix file in Power BI Desktop, and start exploring the dashboards.
 
-- Creators of Microsoft PowerBI - It's a pretty amazing tool!
-- All the kind and patient cashiers who took the time to print out a receipt for me.
-- Viewers of my GitHub page...Thanks for visiting!
+Future Enhancements
 
+Improve dashboard design with professional templates.
 
-<!-- Image References -->
+Develop a generalized version for anyone to use (possibly via Docker).
 
-[ExecSumm]: images/executive_summary.png "Main summary of data"
-[Granular]: images/granular_info.png "Second dashboard for detailed inormation"
-[DashPlan]: images/dashboard_planning.jpg "My original layout for the dashboards"
-[Questions]: images/investigative_questions.jpg "The original questions I wanted answers to"
+Introduce new metrics and comparisons.
+
+Optimize dashboards for mobile and tablet viewing.
+
+
+
+Acknowledgements
+
+Microsoft’s Power BI team for a powerful analytics tool.
+
+Cashiers who helped by printing receipts.
+
+Everyone visiting and exploring this project!
